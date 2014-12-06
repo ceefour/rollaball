@@ -6,11 +6,13 @@ public class PlayerController : MonoBehaviour {
 
 	public float speed;
 	public Text countText;
+	public Text winText;
 	private int count;
 
 	void Start() {
 		count = 0;
-		countText.text = "Count: " + count;
+		UpdateTexts ();
+		winText.text = "";
 	}
 
 	void FixedUpdate() {
@@ -40,7 +42,14 @@ public class PlayerController : MonoBehaviour {
 		if (other.gameObject.tag == "PickUp") {
 			other.gameObject.SetActive(false);
 			count++;
-			countText.text = "Count: " + count;
+			UpdateTexts();
+		}
+	}
+
+	protected void UpdateTexts() {
+		countText.text = "Count: " + count;
+		if (count >= 13) {
+				winText.text = "YOU WIN!";
 		}
 	}
 
